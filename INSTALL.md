@@ -25,6 +25,7 @@ and its `XPolicyLab` submodule even if you only train. The simulator install bel
 ```bash
 cd ..
 git clone https://github.com/Shua-Kang/my_roboTwin2.0.git RoboTwin && cd RoboTwin
+git checkout aafd43ce76ad6240329d982ec5d1c5117385fe70     # pinned RoboTwin commit (the patch below is made for it)
 git submodule update --init XPolicyLab && (cd XPolicyLab && git checkout 482367a)   # Diffusion Policy code
 git apply ../RARA/robotwin/workspace_override.patch       # common object workspace for the pre-training data
 cp ../RARA/robotwin/task_config/*.yml env_cfg/task_config/  # eval_id / eval_ood settings for the pill task

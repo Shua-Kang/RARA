@@ -2,8 +2,6 @@
 
 RARA adapts a pre-trained robot policy to a new task by retrieving the related part of its pre-training data and
 keeping the policy's visual representation aligned to it during fine-tuning.
-This repository reproduces it with a Diffusion Policy on one RoboTwin 2.0 task, **move pill bottle to pad**,
-next to the two standard baselines, fine-tuning (FT) and co-fine-tuning (Co-FT).
 
 <p align="center"><img src="assets/teaser.png" width="90%"></p>
 
@@ -72,18 +70,6 @@ Success rate (%) on move pill bottle to pad, demonstration configuration, `scrip
 
 The retrieved set keeps the pick-and-place episodes of the pre-training data (task filter) and, among them, the 250
 whose grasp-relative end-effector trajectories are closest to the pill demonstrations under dynamic time warping.
-
-## Repository layout
-
-```
-rara/workspace.py        training loop: pre-training, FT, Co-FT, RARA stage 2 (feature anchor)
-rara/stage1.py           RARA stage 1: contrastive alignment of the encoder to retrieved frames
-rara/dataset.py          target / pre-training batches mixed at a fixed ratio
-rara/config/             Diffusion Policy configuration (official RoboTwin hyper-parameters)
-eval/                    policy server + RoboTwin closed-loop client
-robotwin/                RoboTwin patch and evaluation settings
-scripts/                 download, train, stage1, eval, evaluate
-```
 
 ## Acknowledgements
 
