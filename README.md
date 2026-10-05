@@ -36,24 +36,24 @@ To use your own pre-trained policy in the steps below, set `P=runs/pretrain_s42/
 bash scripts/select.sh                   # pick-and-place episodes ranked by trajectory DTW to the target
 ```
 
-**5. Train** from the pre-trained policy:
+**5. Train** FT and RARA from the pre-trained policy:
 
 ```bash
 MODE=ft   bash scripts/train.sh          # FT
-MODE=coft bash scripts/train.sh          # Co-FT
 bash scripts/stage1.sh                   # RARA, stage 1: align the encoder to the selected data
 MODE=rara bash scripts/train.sh          # RARA, stage 2: fine-tune with the anchor to the pre-trained policy
+# MODE=coft bash scripts/train.sh        # Co-FT (optional baseline)
 ```
 
-**6. Evaluate** (last 3 checkpoints x 2 seed blocks x 25 episodes):
+**6. Evaluate** (last 3 checkpoints x 2 seed blocks x 25 episodes; use `runs/pill_ft_s42` for FT):
 
 ```bash
-for m in ft coft rara; do bash scripts/evaluate.sh runs/pill_${m}_s42 id; done
+bash scripts/evaluate.sh runs/pill_rara_s42 id     # demonstration configuration
+bash scripts/evaluate.sh runs/pill_rara_s42 ood    # wider object positions
 ```
 
-The released fine-tuned checkpoints can be evaluated directly, e.g.
+The released checkpoints can be evaluated directly, e.g.
 `CKPT=data/weights/rara.pt SPLIT=id SEEDSTART=100000 TAG=rara_id bash scripts/eval.sh`.
-Use `SPLIT=ood` for the wider object-position setting (`robotwin/task_config/eval_ood.yml`).
 
 ## Expected results
 
