@@ -57,12 +57,12 @@ The released checkpoints can be evaluated directly, e.g.
 
 ## Expected results
 
-Success rate (%) on move pill bottle to pad, demonstration configuration, `scripts/evaluate.sh` protocol
-(last three checkpoints x 2 seed blocks x 25 episodes = 150 rollouts per method):
+ID success rate (%) on move pill bottle to pad (`scripts/evaluate.sh <run> id`: last three checkpoints
+x 2 seed blocks x 25 episodes = 150 rollouts per method):
 
-| FT | Co-FT | RARA |
-|---|---|---|
-| 44.0 | 44.7 | **59.3** |
+| | FT | Co-FT | RARA |
+|---|---|---|---|
+| ID | 44.0 | 44.7 | **59.3** |
 
 ## Data and checkpoints
 
