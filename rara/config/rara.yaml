@@ -1,0 +1,110 @@
+# RoboTwin XPolicyLab/policy/DP robot_dp.yaml with the training workspace of this repo (mixed target / pre-training
+# batches, RARA anchor, light EMA checkpoints) and the two-camera task config. Model, optimizer, EMA and schedule
+# hyper-parameters are the official ones.
+defaults:
+  - _self_
+  - task: robotwin_pill
+
+name: rara
+_target_: workspace.TrainWorkspace
+output_dir: ???
+run_name: ???
+task_name: ${task.name}
+shape_meta: ${task.shape_meta}
+
+horizon: 8
+n_obs_steps: 3
+n_action_steps: 6
+n_latency_steps: 0
+dataset_obs_steps: ${n_obs_steps}
+past_action_visible: False
+keypoint_visible_rate: 1.0
+obs_as_global_cond: True
+
+policy:
+  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+  shape_meta: ${shape_meta}
+  noise_scheduler:
+    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+    num_train_timesteps: 100
+    beta_start: 0.0001
+    beta_end: 0.02
+    beta_schedule: squaredcos_cap_v2
+    variance_type: fixed_small
+    clip_sample: True
+    prediction_type: epsilon
+  obs_encoder:
+    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+    shape_meta: ${shape_meta}
+    rgb_model:
+      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+      name: resnet18
+      weights: null
+    resize_shape: null
+    crop_shape: null
+    random_crop: True
+    use_group_norm: True
+    share_rgb_model: False
+    imagenet_norm: True
+  horizon: ${horizon}
+  n_action_steps: ${eval:'${n_action_steps}+${n_latency_steps}'}
+  n_obs_steps: ${n_obs_steps}
+  num_inference_steps: 100
+  obs_as_global_cond: ${obs_as_global_cond}
+  diffusion_step_embed_dim: 128
+  down_dims: [256, 512, 1024]
+  kernel_size: 5
+  n_groups: 8
+  cond_predict_scale: True
+
+ema:
+  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+  update_after_step: 0
+  inv_gamma: 1.0
+  power: 0.75
+  min_value: 0.0
+  max_value: 0.9999
+
+dataloader:
+  batch_size: 128
+  shuffle: True
+
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 1.0e-4
+  betas: [0.95, 0.999]
+  eps: 1.0e-8
+  weight_decay: 1.0e-6
+
+training:
+  device: "cuda:0"
+  seed: 42
+  debug: False
+  lr_scheduler: cosine
+  lr_warmup_steps: 500
+  num_epochs: 300
+  gradient_accumulate_every: 1
+  use_ema: True
+  init_ckpt: null           # initialise from this checkpoint (EMA weights), e.g. the pre-trained policy
+  anchor_parts: []          # dataset parts used ONLY for the feature anchor (no behaviour cloning): [1] for RARA
+  anchor_lambda: 0.0        # weight of the feature anchor (RARA: 1.0)
+  anchor_ref_ckpt: null     # frozen reference for the anchor (RARA: the pre-trained policy); default = init_ckpt
+  checkpoint_every: 25      # epochs; light EMA-only checkpoints
+  val_every: 5
+  sample_every: 25
+  max_train_steps: null
+  max_val_steps: null
+  log_every: 20
+  tqdm_interval_sec: 10.0
+
+logging:
+  project: rara-robotwin
+  entity: null              # your wandb entity; logging.mode=offline or disabled to skip uploads
+  mode: online
+
+hydra:
+  run:
+    dir: ${output_dir}
+  output_subdir: hydra
+  job:
+    chdir: False

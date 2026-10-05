@@ -1,0 +1,21 @@
+# Training / policy-server environment (Python 3.10):
+#   uv venv .venv --python 3.10
+#   uv pip install -p .venv -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
+# The Diffusion Policy model code is imported from RoboTwin's XPolicyLab/policy/DP (scripts/env.sh sets PYTHONPATH).
+torch==2.4.1+cu121
+torchvision==0.19.1+cu121
+diffusers==0.11.1
+zarr==2.12.0
+numcodecs==0.13.1
+hydra-core==1.2.0
+omegaconf==2.3.1
+numba==0.56.4
+numpy==1.23.5
+scipy==1.15.3
+einops==0.4.1
+dill==0.3.5.1
+opencv-python==4.11.0.86
+wandb==0.29.0
+tqdm
+huggingface_hub==0.25.2      # diffusers 0.11.1 imports HfFolder, removed in later releases
+imageio==2.37.4

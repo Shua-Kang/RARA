@@ -1,0 +1,10 @@
+data/
+runs/
+eval_out/
+wandb/
+outputs/
+.venv/
+*.pt
+*.zarr
+__pycache__/
+*.pyc

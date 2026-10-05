@@ -1,0 +1,28 @@
+# Observations: head camera + right wrist camera (240x320 RGB) and the 14-d joint state; 14-d joint-position actions.
+name: robotwin_pill
+
+image_shape: &image_shape [3, 240, 320]
+shape_meta: &shape_meta
+  obs:
+    head_cam:
+      shape: *image_shape
+      type: rgb
+    right_cam:
+      shape: *image_shape
+      type: rgb
+    agent_pos:
+      shape: [14]
+      type: low_dim
+  action:
+    shape: [14]
+
+dataset:
+  _target_: dataset.MixedRobotImageDataset
+  zarr_paths: ???
+  mix_ratios: null
+  batch_size: ${dataloader.batch_size}
+  horizon: ${horizon}
+  pad_before: ${eval:'${n_obs_steps}-1'}
+  pad_after: ${eval:'${n_action_steps}-1'}
+  seed: 42
+  val_ratio: 0.02

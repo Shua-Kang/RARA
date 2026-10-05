@@ -1,0 +1,1771 @@
+diff --git a/env_cfg/task_config/pre_ws_full.yml b/env_cfg/task_config/pre_ws_full.yml
+new file mode 100644
+index 0000000..992b886
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_full.yml
+@@ -0,0 +1,58 @@
++# pre_ws: pre_full randomisation + workspace_override (dataset v2 camera/body conventions)
++render_freq: 0
++episode_num: 200
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
+diff --git a/env_cfg/task_config/pre_ws_s0.yml b/env_cfg/task_config/pre_ws_s0.yml
+new file mode 100644
+index 0000000..753c06a
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s0.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 0: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5000000
+diff --git a/env_cfg/task_config/pre_ws_s1.yml b/env_cfg/task_config/pre_ws_s1.yml
+new file mode 100644
+index 0000000..e80eae6
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s1.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 1: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5010000
+diff --git a/env_cfg/task_config/pre_ws_s10.yml b/env_cfg/task_config/pre_ws_s10.yml
+new file mode 100644
+index 0000000..1a7a9c4
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s10.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 10: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5100000
+diff --git a/env_cfg/task_config/pre_ws_s11.yml b/env_cfg/task_config/pre_ws_s11.yml
+new file mode 100644
+index 0000000..d3f6668
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s11.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 11: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5110000
+diff --git a/env_cfg/task_config/pre_ws_s12.yml b/env_cfg/task_config/pre_ws_s12.yml
+new file mode 100644
+index 0000000..8642af4
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s12.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 12: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5120000
+diff --git a/env_cfg/task_config/pre_ws_s13.yml b/env_cfg/task_config/pre_ws_s13.yml
+new file mode 100644
+index 0000000..78f10f0
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s13.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 13: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5130000
+diff --git a/env_cfg/task_config/pre_ws_s14.yml b/env_cfg/task_config/pre_ws_s14.yml
+new file mode 100644
+index 0000000..074e97c
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s14.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 14: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5140000
+diff --git a/env_cfg/task_config/pre_ws_s15.yml b/env_cfg/task_config/pre_ws_s15.yml
+new file mode 100644
+index 0000000..8041423
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s15.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 15: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5150000
+diff --git a/env_cfg/task_config/pre_ws_s16.yml b/env_cfg/task_config/pre_ws_s16.yml
+new file mode 100644
+index 0000000..c8245c2
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s16.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 16: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5160000
+diff --git a/env_cfg/task_config/pre_ws_s17.yml b/env_cfg/task_config/pre_ws_s17.yml
+new file mode 100644
+index 0000000..ad240b4
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s17.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 17: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5170000
+diff --git a/env_cfg/task_config/pre_ws_s18.yml b/env_cfg/task_config/pre_ws_s18.yml
+new file mode 100644
+index 0000000..303b999
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s18.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 18: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5180000
+diff --git a/env_cfg/task_config/pre_ws_s19.yml b/env_cfg/task_config/pre_ws_s19.yml
+new file mode 100644
+index 0000000..34fe3f0
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s19.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 19: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5190000
+diff --git a/env_cfg/task_config/pre_ws_s2.yml b/env_cfg/task_config/pre_ws_s2.yml
+new file mode 100644
+index 0000000..2bcb877
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s2.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 2: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5020000
+diff --git a/env_cfg/task_config/pre_ws_s20.yml b/env_cfg/task_config/pre_ws_s20.yml
+new file mode 100644
+index 0000000..92b2b61
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s20.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 20: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5200000
+diff --git a/env_cfg/task_config/pre_ws_s21.yml b/env_cfg/task_config/pre_ws_s21.yml
+new file mode 100644
+index 0000000..548e88f
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s21.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 21: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5210000
+diff --git a/env_cfg/task_config/pre_ws_s22.yml b/env_cfg/task_config/pre_ws_s22.yml
+new file mode 100644
+index 0000000..e2ad2d1
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s22.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 22: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5220000
+diff --git a/env_cfg/task_config/pre_ws_s23.yml b/env_cfg/task_config/pre_ws_s23.yml
+new file mode 100644
+index 0000000..91992c3
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s23.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 23: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5230000
+diff --git a/env_cfg/task_config/pre_ws_s24.yml b/env_cfg/task_config/pre_ws_s24.yml
+new file mode 100644
+index 0000000..6744b35
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s24.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 24: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5240000
+diff --git a/env_cfg/task_config/pre_ws_s3.yml b/env_cfg/task_config/pre_ws_s3.yml
+new file mode 100644
+index 0000000..bf7b031
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s3.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 3: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5030000
+diff --git a/env_cfg/task_config/pre_ws_s4.yml b/env_cfg/task_config/pre_ws_s4.yml
+new file mode 100644
+index 0000000..e7b95d3
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s4.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 4: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5040000
+diff --git a/env_cfg/task_config/pre_ws_s5.yml b/env_cfg/task_config/pre_ws_s5.yml
+new file mode 100644
+index 0000000..dd625ea
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s5.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 5: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5050000
+diff --git a/env_cfg/task_config/pre_ws_s6.yml b/env_cfg/task_config/pre_ws_s6.yml
+new file mode 100644
+index 0000000..87ddeaa
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s6.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 6: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5060000
+diff --git a/env_cfg/task_config/pre_ws_s7.yml b/env_cfg/task_config/pre_ws_s7.yml
+new file mode 100644
+index 0000000..652e51b
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s7.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 7: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5070000
+diff --git a/env_cfg/task_config/pre_ws_s8.yml b/env_cfg/task_config/pre_ws_s8.yml
+new file mode 100644
+index 0000000..4b4e92e
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s8.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 8: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5080000
+diff --git a/env_cfg/task_config/pre_ws_s9.yml b/env_cfg/task_config/pre_ws_s9.yml
+new file mode 100644
+index 0000000..c5c063e
+--- /dev/null
++++ b/env_cfg/task_config/pre_ws_s9.yml
+@@ -0,0 +1,59 @@
++# pre_ws shard 9: 40 episodes, disjoint seeds (5 000 000 + 10 000 k)
++render_freq: 0
++episode_num: 40
++use_seed: false
++save_freq: 15
++embodiment:
++- aloha-agilex
++language_num: 100
++eval_instruction: seen
++domain_randomization:
++  random_background: true
++  cluttered_table: true
++  clean_background_rate: 0.0
++  random_head_camera_dis: 0
++  random_table_height: 0
++  random_light: true
++  crazy_random_light_rate: 0.0
++  background_pool: 100
++  cluttered_numbers:
++  - 1
++  - 2
++  cluttered_pool: 10
++  pos_rand_scale: 1.0
++  pos_rand_axes: x
++  force_arm: right
++  # workspace_override: every object of the task is placed uniformly in this right-arm workspace instead of the
++  # task's own window = one common right-arm workspace for every object
++  workspace_override:
++    xlim: [0.05, 0.31]
++    ylim: [-0.20, 0.10]
++camera:
++  head_camera_type: D435_fov43
++  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
++  # right arm is in frame; the body + left arm are hidden via hide_robot_links
++  head_camera_pose:
++    position: [0.10, -0.65, 1.50]
++    forward: [0.0, 0.6157, -0.7880]
++    left: [-1.0, 0.0, 0.0]
++  wrist_camera_type: D435
++  collect_head_camera: true
++  collect_wrist_camera: true
++data_type:
++  rgb: true
++  third_view: false
++  depth: false
++  pointcloud: false
++  observer: false
++  endpose: true
++  qpos: true
++  mesh_segmentation: false
++  actor_segmentation: false
++pcd_down_sample_num: 1024
++pcd_crop: true
++save_path: ./data
++clear_cache_freq: 5
++collect_data: true
++eval_video_log: true
++hide_robot_links: all_but_right
++seed_offset: 5090000
+diff --git a/envs/_base_task.py b/envs/_base_task.py
+index ba6f3c9..f85b59e 100644
+--- a/envs/_base_task.py
++++ b/envs/_base_task.py
+@@ -106,6 +106,17 @@ class Base_Task(gym.Env):
+         # inter-object constraint lives on y)
+         os.environ["ROBOTWIN_POS_RAND_AXES"] = str(
+             random_setting.get("pos_rand_axes", "xy"))
++        # xlim_override: [lo, hi] -- replace the grasped object's x window (used to build a real
++        # position-OOD split for tasks whose own window is only a few cm wide); tasks opt in.
++        xo = random_setting.get("xlim_override", None)
++        os.environ["ROBOTWIN_XLIM_OVERRIDE"] = ",".join(str(float(v)) for v in xo) if xo else ""
++        # workspace_override: {xlim: [lo, hi], ylim: [lo, hi]} -- replace EVERY object-placement window of the task
++        # (grasped object and target object alike) by one right-arm workspace, so a pre-training pool covers the
++        # union of the target tasks' ID/OOD object ranges (pre_ws_* configs). Applied inside rand_pose(); z and
++        # rotation sampling and the tasks' own rejection constraints (min distances, |x| >= m loops) are untouched.
++        wso = random_setting.get("workspace_override", None)
++        os.environ["ROBOTWIN_WS_OVERRIDE"] = (",".join(str(float(v)) for v in list(wso["xlim"]) + list(wso["ylim"]))
++                                             if wso else "")
+         self.random_embodiment = random_setting.get("random_embodiment", False)  # TODO
+ 
+         self.file_path = []
+@@ -418,7 +429,13 @@ class Base_Task(gym.Env):
+         """
+         if not hasattr(self, "robot"):
+             self.robot = Robot(self.scene, self.need_topp, **kwags)
+-            self.robot.set_planner(self.scene)
++            # ROBOTWIN_SKIP_PLANNER=1: policy evaluation (need_plan=False) never calls the curobo planners, and
++            # curobo cannot build them on Volta GPUs -- skipping lets closed-loop evals run on V100 nodes.
++            if self.need_plan or not os.environ.get("ROBOTWIN_SKIP_PLANNER"):
++                self.robot.set_planner(self.scene)
++            else:
++                self.robot.left_planner = self.robot.right_planner = None
++                self.robot.communication_flag = False
+             self.robot.init_joints()
+         else:
+             self.robot.reset(self.scene, self.need_topp, **kwags)
+diff --git a/envs/rotate_qrcode.py b/envs/rotate_qrcode.py
+index 12f1eac..7b20539 100644
+--- a/envs/rotate_qrcode.py
++++ b/envs/rotate_qrcode.py
+@@ -1,3 +1,4 @@
++import os
+ from ._base_task import Base_Task
+ from .utils.rand_create_actor import force_arm_xlim
+ from .utils import *
+@@ -40,6 +41,15 @@ class rotate_qrcode(Base_Task):
+         # Define target placement position based on arm tag (left or right side of table)
+         target_x = -0.2 if self.qrcode.get_pose().p[0] < 0 else 0.2
+         self.target_pose = [target_x, -0.15, 0.74 + self.table_z_bias, 1, 0, 0, 0]
++        if os.environ.get("ROBOTWIN_WS_OVERRIDE", ""):
++            # workspace_override: the placement target is sampled in the same workspace (rand_pose ignores the
++            # xlim/ylim given here), at least 10 cm from the sign so the rotate-and-place motion stays non-trivial
++            q = self.qrcode.get_pose().p
++            for _ in range(200):
++                tp = rand_pose(xlim=[0.0, 0.0], ylim=[0.0, 0.0])
++                if np.hypot(tp.p[0] - q[0], tp.p[1] - q[1]) >= 0.1:
++                    break
++            self.target_pose = [float(tp.p[0]), float(tp.p[1]), 0.74 + self.table_z_bias, 1, 0, 0, 0]
+ 
+     def play_once(self):
+         # Determine which arm to use based on QR code position (left if on left side, right otherwise)
+diff --git a/envs/utils/rand_create_actor.py b/envs/utils/rand_create_actor.py
+index 431a030..8a5cc9f 100644
+--- a/envs/utils/rand_create_actor.py
++++ b/envs/utils/rand_create_actor.py
+@@ -63,6 +63,15 @@ def rand_pose(
+     if len(ylim) < 2 or ylim[1] < ylim[0]:
+         ylim = np.array([ylim[0], ylim[0]])
+ 
++    # ---- workspace override (task config `workspace_override`): one placement window for every object ----
++    # ROBOTWIN_WS_OVERRIDE = "xlo,xhi,ylo,yhi" replaces the caller's xlim/ylim (grasped and target objects alike)
++    # so a pre-training pool samples the whole right-arm workspace instead of each task's hard-coded window.
++    _ws = os.environ.get("ROBOTWIN_WS_OVERRIDE", "")
++    if _ws:
++        _xlo, _xhi, _ylo, _yhi = (float(v) for v in _ws.split(","))
++        xlim = np.array([_xlo, _xhi], dtype=float)
++        ylim = np.array([_ylo, _yhi], dtype=float)
++
+     # ---- coverage control: shrink the sampling window about its centre ----
+     # POS_RAND_SCALE is set per-episode from the task config (1.0 = original
+     # range, 0.5 = half-width window with the same centre). Used to build a

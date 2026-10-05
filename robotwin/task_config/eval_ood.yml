@@ -1,0 +1,51 @@
+render_freq: 0
+episode_num: 25
+use_seed: false
+save_freq: 15
+embodiment:
+- aloha-agilex
+language_num: 100
+eval_instruction: seen
+domain_randomization:
+  random_background: true
+  cluttered_table: true
+  clean_background_rate: 0.0
+  random_head_camera_dis: 0
+  random_table_height: 0
+  random_light: true
+  crazy_random_light_rate: 0.0
+  background_pool: 10
+  cluttered_numbers:
+  - 1
+  - 2
+  cluttered_pool: 2
+  pos_rand_scale: 0.65
+  force_arm: right
+camera:
+  head_camera_type: D435_fov43
+  # D4 placement: pulled back over the robot base, 52 deg pitch, so the home-pose
+  # right arm is in frame; the body + left arm are hidden via hide_robot_links
+  head_camera_pose:
+    position: [0.10, -0.65, 1.50]
+    forward: [0.0, 0.6157, -0.7880]
+    left: [-1.0, 0.0, 0.0]
+  wrist_camera_type: D435
+  collect_head_camera: true
+  collect_wrist_camera: true
+data_type:
+  rgb: true
+  third_view: false
+  depth: false
+  pointcloud: false
+  observer: false
+  endpose: true
+  qpos: true
+  mesh_segmentation: false
+  actor_segmentation: false
+pcd_down_sample_num: 1024
+pcd_crop: true
+save_path: ./data
+clear_cache_freq: 5
+collect_data: true
+eval_video_log: true
+hide_robot_links: all_but_right
