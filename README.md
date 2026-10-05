@@ -16,39 +16,44 @@ uv pip install -p .venv -r requirements.txt --extra-index-url https://download.p
 # then RoboTwin 2.0 next to this folder: see INSTALL.md
 ```
 
-**2. Download** data and checkpoints from Hugging Face:
+**2. Download** the pill demonstrations, the pre-training data and the checkpoints:
 
 ```bash
-bash scripts/download.sh            # pill demos, retrieved pre-training data, all checkpoints
+bash scripts/download.sh            # add "small" to skip the 77 GB pre-training data and use the released selection
 ```
 
-**3. Evaluate the released checkpoints** (2 seed blocks x 25 episodes each):
+**3. Pre-train** (optional; the pre-trained policy is part of the download):
 
 ```bash
-for m in ft coft rara; do
-  for s in 100000 200000; do CKPT=data/weights/$m.pt SPLIT=id SEEDSTART=$s TAG=${m}_id_$s bash scripts/eval.sh; done
-done
-for m in ft coft rara; do python scripts/summarize.py eval_out "${m}_id_*"; done
+MODE=pretrain bash scripts/train.sh      # 2000 demonstrations, 60 epochs, batch 256; 4 GPUs, ~160 GB host RAM
 ```
 
-**4. Train** from the pre-trained policy:
+To use your own pre-trained policy in the steps below, set `P=runs/pretrain_s42/checkpoints/epoch0060.pt`.
+
+**4. Select** the 250 pre-training episodes closest to the pill demonstrations:
+
+```bash
+bash scripts/select.sh                   # pick-and-place episodes ranked by trajectory DTW to the target
+```
+
+**5. Train** from the pre-trained policy:
 
 ```bash
 MODE=ft   bash scripts/train.sh          # FT
 MODE=coft bash scripts/train.sh          # Co-FT
-bash scripts/stage1.sh                   # RARA, stage 1: align the encoder to the retrieved data
+bash scripts/stage1.sh                   # RARA, stage 1: align the encoder to the selected data
 MODE=rara bash scripts/train.sh          # RARA, stage 2: fine-tune with the anchor to the pre-trained policy
-bash scripts/evaluate.sh runs/pill_rara_s42 id     # last 3 checkpoints x 2 seed blocks x 25 episodes
 ```
 
-**5. Pre-train** (optional; the pre-trained policy is part of the download):
+**6. Evaluate** (last 3 checkpoints x 2 seed blocks x 25 episodes):
 
 ```bash
-bash scripts/download.sh pretrain        # 2000-demonstration pre-training set (77 GB)
-MODE=pretrain bash scripts/train.sh      # 60 epochs, batch 256; 4 GPUs recommended, ~160 GB host RAM
+for m in ft coft rara; do bash scripts/evaluate.sh runs/pill_${m}_s42 id; done
 ```
 
-Use `SPLIT=ood` in `scripts/eval.sh` for the wider object-position setting (`robotwin/task_config/eval_ood.yml`).
+The released fine-tuned checkpoints can be evaluated directly, e.g.
+`CKPT=data/weights/rara.pt SPLIT=id SEEDSTART=100000 TAG=rara_id bash scripts/eval.sh`.
+Use `SPLIT=ood` for the wider object-position setting (`robotwin/task_config/eval_ood.yml`).
 
 ## Expected results
 
