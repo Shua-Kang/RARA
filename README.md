@@ -19,7 +19,7 @@ uv pip install -p .venv -r requirements.txt --extra-index-url https://download.p
 **2. Download** the pill demonstrations, the pre-training data and the checkpoints:
 
 ```bash
-bash scripts/download.sh            # add "small" to skip the 77 GB pre-training data and use the released selection
+bash scripts/download.sh            # add "small" to skip the 77 GB pre-training data (steps 3 and 4 then use the released weights and selection)
 ```
 
 **3. Pre-train** (optional; the pre-trained policy is part of the download):
@@ -30,7 +30,7 @@ MODE=pretrain bash scripts/train.sh      # 2000 demonstrations, 60 epochs, batch
 
 To use your own pre-trained policy in the steps below, set `P=runs/pretrain_s42/checkpoints/epoch0060.pt`.
 
-**4. Select** the 250 pre-training episodes closest to the pill demonstrations:
+**4. Select** (optional; the 250 pre-selected episodes are part of the download) the pre-training episodes closest to the pill demonstrations:
 
 ```bash
 bash scripts/select.sh                   # pick-and-place episodes ranked by trajectory DTW to the target

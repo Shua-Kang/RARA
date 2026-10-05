@@ -17,10 +17,10 @@ dl ShuaKang/RARA-robotwin-pretrain model $DATA/weights
 dl ShuaKang/RARA-robotwin-pill model $DATA/weights
 ln -sfn $DATA/hf_pill/dp_zarr/narrow_move_pillbottle_pad.zarr $DATA/zarr/pill_target.zarr
 ln -sfn $DATA/hf_pill/geometry/narrow_move_pillbottle_pad.npz $DATA/geometry/pill_target.npz
-if [[ ${1:-} == small ]]; then
-  ln -sfn $DATA/hf_pill/dp_zarr/ret250L_move_pillbottle_pad_ws2k.zarr $DATA/zarr/pill_retrieved.zarr
-  ln -sfn $DATA/hf_pill/geometry/ret250L_move_pillbottle_pad_ws2k.npz $DATA/geometry/pill_retrieved.npz
-else
+# the released pre-selected 250 episodes (scripts/select.sh recomputes the same selection and replaces these links)
+ln -sfn $DATA/hf_pill/dp_zarr/ret250L_move_pillbottle_pad_ws2k.zarr $DATA/zarr/pill_retrieved.zarr
+ln -sfn $DATA/hf_pill/geometry/ret250L_move_pillbottle_pad_ws2k.npz $DATA/geometry/pill_retrieved.npz
+if [[ ${1:-} != small ]]; then
   dl ShuaKang/my_roboTwin2.0_training dataset $DATA/hf_pretrain "dp_zarr_ws/pre_ws_2k.*"
   ln -sfn $DATA/hf_pretrain/dp_zarr_ws/pre_ws_2k.zarr          $DATA/zarr/pretrain.zarr
   ln -sfn $DATA/hf_pretrain/dp_zarr_ws/pre_ws_2k.npz           $DATA/geometry/pretrain.npz
