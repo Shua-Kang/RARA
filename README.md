@@ -1,5 +1,10 @@
 # RARA: Retrieval-Anchored Representation Alignment
 
+<p align="center">
+  <a href="https://arxiv.org/abs/2610.13578">Paper</a> &nbsp;|&nbsp;
+  <a href="https://shua-kang.github.io/RARA_robot/">Project page</a>
+</p>
+
 RARA adapts a pre-trained robot policy to a new task by retrieving the related part of its pre-training data and
 keeping the policy's visual representation aligned to it during fine-tuning.
 
